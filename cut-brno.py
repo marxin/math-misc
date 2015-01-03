@@ -61,9 +61,13 @@ def dot(vector1, vector2):
 # y = [0.1, 0.93, 0.67, 0.11, -0.37, -1.02, -0.2]
 # f = [lambda x: 1, lambda x: sin(x)]
 
-x = [0, 1, 2]
-y = [2.1, 3.6, 4.7]
-f = [lambda x: x, lambda x: 1]
+##########################
+# MINIMAL SQUARES METHOD #
+##########################
+
+x = [-0.1, 0, 0.1, 0.3]
+y = [-1.2, 0, -0.9, -2.5]
+f = [lambda x: x**2, lambda x: x, lambda x: 1]
 
 # x = range(-1, 3)
 # fx = lambda x: x**2
@@ -92,7 +96,7 @@ print(b)
 # print GEPP(np.copy(A), np.copy(b), doPricing = False)
 solution = GEPP(A,b)
 
-print('Approximation solution')
+print('Approximation solution of square method')
 print(solution)
 
 approx = np.zeros((len(x)))
@@ -151,8 +155,15 @@ for i in range(1, l):
       r = a / b
     V[j][i] = r
 
-np.set_printoptions(formatter={'float': '{: 3.2f}'.format})
+np.set_printoptions(formatter={'float': '{: 3.4f}'.format})
 print(V)
+
+A = np.array([[1, -1, 0, 0, 0, 0],[-55, 100, -45, 0, 0, 0],[0, -55, 100, 45, 0, 0],[0, 0, -55, 100, 45, 0],[0, 0, 0, -55, 100, 45],[0, 0, 0, 0, -110, 100]])
+
+B = np.array([0, 2.4, 2.6, 2.8, 4, 4])
+
+print('GAUS for Ax=B')
+print(GEPP(A, B))
 
 # Cholesky decomposition
 print("Cholesky decomposition")
@@ -163,18 +174,20 @@ print(d)
 print(np.dot(d, d.T.conj()))
 
 
-asdfasdf
-
 # Newton for 2 nonlinear equations
 # values = [[0, 0]]
-values = [[1.7, -4]]
+values = [[0.1, -1]]
 
 print("Gaus 2D")
 # functions = [lambda x, y: x - exp(y) + x**3, lambda x, y: y - 2*exp(x) + y**3]
-functions = [lambda x, y: x-1/y-2, lambda x, y: (x-2)**2+((y+2)**2)/4-1]
+# functions = [lambda x, y: x-1/y-2, lambda x, y: (x-2)**2+((y+2)**2)/4-1]
+# functions = [lambda x, y: 2*x-exp(y)+2, lambda x, y: exp(x)+y-1]
+functions = [lambda x, y: log(x)-y+1, lambda x, y: x-y**2+1]
+
 l = len(functions)
 # Jacobi = np.array([[lambda x, y: 1 + 3 * x**2, lambda x, y: -exp(y)], [lambda x, y: -2*exp(x), lambda x, y: 1 + 3 * y**2]])
-Jacobi = np.array([[lambda x, y: 1, lambda x, y: y**-2], [lambda x, y: 2*x-4, lambda x, y: y/2+1]])
+# Jacobi = np.array([[lambda x, y: 2, lambda x, y: -exp(y)], [lambda x, y: exp(x), lambda x, y: 1]])
+Jacobi = np.array([[lambda x, y: 1/x, lambda x, y: -1], [lambda x, y: 1, lambda x, y: -2*y]])
 
 for i in range(5):
   print('Iteration: %d' % i)
