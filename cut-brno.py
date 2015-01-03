@@ -173,7 +173,6 @@ d = np.linalg.cholesky(A)
 print(d)
 print(np.dot(d, d.T.conj()))
 
-
 # Newton for 2 nonlinear equations
 # values = [[0, 0]]
 values = [[0.1, -1]]
@@ -213,3 +212,14 @@ for i in range(10):
   new = prev - F(prev) / FD(prev)
   values.append(new)
   print('New value: %f, difference: %f' % (new, F(new)))
+
+
+print('Network method')
+
+A = np.array([[8, -2, 0, 0], [-6, 8, -2, 0], [0, -6, 8, -2], [0, 0, -8, 16]])
+b = np.array([7, 1, 1, 1])
+
+print(A)
+print(b)
+solution = GEPP(A, b)
+print(solution)
